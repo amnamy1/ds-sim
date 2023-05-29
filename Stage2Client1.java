@@ -47,8 +47,6 @@ String jobID = job[2]; // finding jobID
 
 //System.out.println("checkkk111");
 
-if (BestSerFound == false){
-//System.out.println(BestSerFound);//11111111111
 	String [] jobInfo = serverReply.split(" ",-1);
 	int jobCore = Integer.parseInt(jobInfo[4]);
 	String jobMemory = jobInfo[5];
@@ -81,14 +79,15 @@ if (BestSerFound == false){
 		int recCore = Integer.parseInt(arr3[4]);
 		//System.out.println("no. of jobs = "+  Tjob);
 		
-		//if (BestSerFound = false){
+		//if (BestServer == ""){
 	
 		//System.out.println(jobCore + "and" + recCore);
 		//if  (recCore >=  jobCore){
 		//System.out.println("serv has enough cores" );
 		//}
 		
-		//if  (Tjob == 0){
+		//if  (Tjob == 0){ /////////////////////
+		
 		//System.out.println("no waiting or running jobs" );
 		//}
 		
@@ -97,9 +96,7 @@ if (BestSerFound == false){
 				BestServer = arr3[0];
 				serverID = Integer.parseInt(arr3[1]);
 				//System.out.println("bestserv = " +  BestServer + serverID);	
-					if ( BestServer != "" ){
-						BestSerFound = true;
-					}
+				
 			}
 		//}		
 		if (i == 0){
@@ -117,24 +114,23 @@ out.write(("OK\n").getBytes());                          //Send OK
 serverReply = in.readLine();                            //recieve . 
 //System.out.println("check2.5 " + serverReply);//11111111111
  		
-}//end bestserv
+
 
 //System.out.println("checkkk1.5 " + BestServer + serverID);//11111111111
 
 //System.out.println("check3: ");//11111111111
 			
-if ( job[0].equals("JOBN") & BestSerFound == false ){
+if ( job[0].equals("JOBN") & BestServer == "" ){
 	out.write(("SCHD "+jobID+" "+ FirstServ +" "+ FirstServID+"\n").getBytes()); //send SCHD 0 joon 0  
 	//System.out.println("used first server");
 	} //end if 
 			
-else if ( job[0].equals("JOBN") & BestSerFound == true ){
+else if ( job[0].equals("JOBN") & BestServer != ""){
 	out.write(("SCHD "+jobID+" "+ BestServer +" "+serverID+"\n").getBytes()); //send SCHD 0 joon 0  
 	//System.out.println("used best server");
 	} //end else 
 	serverReply = in.readLine();   // recieve ok
 //	System.out.println("last msg: " + serverReply);//11111111111
-BestSerFound = false;
 }
 } // end WHILE
 
