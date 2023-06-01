@@ -73,8 +73,8 @@ String jobID = job[2]; // finding jobID
 	serverReply = in.readLine();     //recieve records
 		String [] arr3 = serverReply.split(" ", -1);   //splits the record read into arr3
 //		System.out.println("Records: "+ serverReply);//11111111111
-		int Rjob = Integer.parseInt(arr3[7]);
-		int Wjob = Integer.parseInt(arr3[8]);
+		int Wjob = Integer.parseInt(arr3[7]);
+		int Rjob = Integer.parseInt(arr3[8]);
 		int Tjob = Rjob + Wjob;
 		int recCore = Integer.parseInt(arr3[4]);
 		//System.out.println("no. of jobs = "+  Tjob);
@@ -91,7 +91,14 @@ String jobID = job[2]; // finding jobID
 		//System.out.println("no waiting or running jobs" );
 		//}
 		
-           		if  (BestServer == "" && recCore >=  jobCore) {                
+           		if  (BestServer == "" && recCore >=  jobCore && Rjob == 0 || Wjob == 0) {                
+				//System.out.println("looking for best server");
+				BestServer = arr3[0];
+				serverID = Integer.parseInt(arr3[1]);
+				//System.out.println("bestserv = " +  BestServer + serverID);	
+				
+			}
+			else if (BestServer == "" && recCore >=  jobCore ) {                
 				//System.out.println("looking for best server");
 				BestServer = arr3[0];
 				serverID = Integer.parseInt(arr3[1]);
